@@ -94,5 +94,5 @@ class CLINT(params: CLINTParams)(implicit p: Parameters) extends LazyModule
 /** Trait that will connect a CLINT to a subsystem */
 trait HasPeripheryCLINT extends HasPeripheryBus {
   val clint = LazyModule(new CLINT(p(CLINTKey)))
-  clint.node := pbus.toVariableWidthSlaves
+  pbus.toVariableWidthSlave(Some("CLINT")) { clint.node }
 }
